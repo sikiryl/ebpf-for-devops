@@ -35,7 +35,7 @@ int trace_kill(struct pt_regs *ctx, int pid, int sig) {
 """)
 
 # Attach to syscall
-syscall = bpf.get_syscall_fnname("kill")
+syscall = bpf.b.get_syscall_prefix().decode() + 'kill'
 bpf.attach_kprobe(event=syscall, fn_name="trace_kill")
 
 print("Tracing SIGKILL... Press Ctrl+C to stop.")
